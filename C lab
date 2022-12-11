@@ -1,0 +1,111 @@
+#include <stdio.h>
+#define size 4
+typedef struct queue
+{
+    int arr[size];
+    int rear, front;
+} queue;
+void init(queue *ptr)
+{
+    ptr->front = -1;
+    ptr->rear = -1;
+}
+int empty(queue *ptr)
+{
+    if (ptr->front == -1)
+    {
+        printf("Empty!!\n");
+        return 1;
+    }
+    else
+    {
+        return 0;
+    }
+}
+int full(queue *ptr)
+{
+    if (ptr->rear == size - 1)
+    {
+        printf("Full!!\n");
+        return 1;
+    }
+    else
+        return 0;
+}
+void add(queue *ptr, int val)
+{
+    if (ptr->rear == -1 || ptr->front == -1)
+    {
+        ptr->front = 0;
+    }
+    if (full(ptr))
+    {
+        return;
+    }
+    ptr->rear++;
+    ptr->arr[ptr->rear] = val;
+    printf("the value %d added successfully!!\n", val);
+}
+void remov(queue *ptr)
+{
+
+    if (empty(ptr))
+    {
+        return;
+    }
+    printf("the value %d is removed!\n", ptr->arr[ptr->front]);
+    ptr->front++;
+
+    if (ptr->front > ptr->rear)
+    {
+        ptr->front = ptr->rear = -1;
+    }
+}
+void show(queue *ptr)
+{
+    if (empty(ptr))
+    {
+        return;
+    }
+    else
+    {
+        printf("the front is %d\n", ptr->arr[ptr->front]);
+    }
+}
+int main()
+{
+    queue q;
+    init(&q);
+    add(&q, 1);
+    add(&q, 2);
+    add(&q, 3);
+    add(&q, 4);
+    add(&q, 5);
+    remov(&q);
+    remov(&q);
+    remov(&q);
+    remov(&q);
+    remov(&q);
+    add(&q, 5);
+    add(&q, 6);
+    add(&q, 7);
+    add(&q, 8);
+    return 0;
+}
+
+/*you can see the output here!
+the value 1 added successfully!!
+the value 2 added successfully!!       
+the value 3 added successfully!!       
+the value 4 added successfully!!       
+Full!!
+the value 1 is removed!
+the value 2 is removed!
+the value 3 is removed!
+the value 4 is removed!
+Empty!!
+the value 5 added successfully!!       
+the value 6 added successfully!!       
+the value 7 added successfully!!       
+the value 8 added successfully!!  
+*/
